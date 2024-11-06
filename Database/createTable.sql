@@ -8,6 +8,9 @@ create table books (
 	soLuong int
 );
 
+ALTER TABLE books
+ADD CONSTRAINT CHECK_SL1 CHECK (soLuong >= 0);
+
 create table people (
 	maDG varchar(15) primary key,
     hoTen varchar(255),

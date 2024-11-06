@@ -89,7 +89,7 @@ public class PhieuMuonSachDAO extends DAO{
         }
     }
     
-    public void deletePhieuMuonSach(int maMuon) {
+    public void traSach(int maMuon) {
         String sql = "update borrow set tinhTrang = 0 where maMuon = ?";
         
         try {
@@ -101,6 +101,20 @@ public class PhieuMuonSachDAO extends DAO{
             ex.printStackTrace();
         }
     }
+    
+     public void deletePhieuMuonSach(int maMuon) {
+        String sql = "delete from borrow where maMuon = ?";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, maMuon);
+            ps.executeUpdate();
+        }
+        catch(Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
     
     public int getSoLuongDocGiaMuonSach() {
         String sql = "select COUNT(distinct maDG) as soLuong from borrow group by maDG";

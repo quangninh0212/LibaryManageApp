@@ -55,6 +55,7 @@ public class Borrow extends javax.swing.JFrame {
         txtTongSoDocGia = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         btnTraSach = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("MƯỢN SÁCH");
@@ -145,6 +146,16 @@ public class Borrow extends javax.swing.JFrame {
             }
         });
 
+        btnDelete.setBackground(new java.awt.Color(204, 204, 255));
+        btnDelete.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/remove.png"))); // NOI18N
+        btnDelete.setText("XOÁ");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -160,12 +171,14 @@ public class Borrow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 811, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnNhapPhieuMuon)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnTraSach, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(btnNhapPhieuMuon, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnTraSach)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(24, 24, 24)
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtTongSoDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -186,11 +199,12 @@ public class Borrow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(btnNhapPhieuMuon, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(btnTraSach, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnExit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(7, 7, 7)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -245,7 +259,7 @@ public class Borrow extends javax.swing.JFrame {
         String maMuon = tableMain.getModel().getValueAt(possition, 0).toString();
         int ma = Integer.parseInt(maMuon);
         PhieuMuonSachDAO phieuMuon = new PhieuMuonSachDAO();
-        phieuMuon.deletePhieuMuonSach(ma);
+        phieuMuon.traSach(ma);
         JOptionPane.showMessageDialog(this, "Susccessful !");
         showTable();
         showTongSoDocGiaMuonSach();
@@ -256,6 +270,18 @@ public class Borrow extends javax.swing.JFrame {
         showTable();
         showTongSoDocGiaMuonSach();
     }//GEN-LAST:event_formComponentShown
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        int possition = tableMain.getSelectedRow();
+        String maMuon = tableMain.getModel().getValueAt(possition, 0).toString();
+        int ma = Integer.parseInt(maMuon);
+        PhieuMuonSachDAO phieuMuonDAO = new PhieuMuonSachDAO();
+        phieuMuonDAO.deletePhieuMuonSach(ma);
+        JOptionPane.showMessageDialog(this, "Susccessful !");
+        showTable();
+        showTongSoDocGiaMuonSach();
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -293,6 +319,7 @@ public class Borrow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnNhapPhieuMuon;
     private javax.swing.JButton btnTraSach;
