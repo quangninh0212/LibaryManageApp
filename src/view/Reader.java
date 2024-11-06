@@ -30,7 +30,9 @@ public class Reader extends javax.swing.JFrame {
     public void clearData(){
         txtMaDG.setText("");
         txtHoTen.setText("");
+        comboGioiTinh.setSelectedIndex(0);
         txtNgaySinh.setText("");
+        comboDoiTuong.setSelectedIndex(0);
     }
     
     public void showTable() {
